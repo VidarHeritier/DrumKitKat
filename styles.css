@@ -1,0 +1,39 @@
+body {
+  border: none;
+  margin: 0;
+  background-image: url("./Images/—Pngtree—background\ abstract\ sound\ waves\ with_1202132.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  min-height: 100vh;
+  font-weight: bolder;
+  font-family: "Limelight", cursive;
+}
+h1 {
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
+    0 0 42px rgb(255, 0, 195), 0 0 82px rgb(255, 0, 195),
+    0 0 92px rgb(255, 0, 195), 0 0 102px rgb(255, 0, 195),
+    0 0 151px rgb(255, 0, 195);
+  animation: flicker 1.5s infinite alternate;
+}
+@keyframes flicker {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff,
+      0 0 40px rgb(255, 0, 195), 0 0 80px rgb(255, 0, 195),
+      0 0 90px rgb(255, 0, 195), 0 0 100px rgb(255, 0, 195),
+      0 0 150px rgb(255, 0, 195);
+  }
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+  }
+}
