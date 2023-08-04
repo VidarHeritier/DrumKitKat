@@ -5,18 +5,97 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
-  min-height: 100vh;
-  font-weight: bolder;
+  height: 100svh;
   font-family: "Limelight", cursive;
+  overflow: hidden;
+}
+.container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 2rem;
+  margin: 3rem 5rem;
 }
 h1 {
+  margin: 5rem 10rem 0 5em;
   text-align: center;
+  font-weight: 100;
+  letter-spacing: 0.2rem;
   color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
     0 0 42px rgb(255, 0, 195), 0 0 82px rgb(255, 0, 195),
     0 0 92px rgb(255, 0, 195), 0 0 102px rgb(255, 0, 195),
     0 0 151px rgb(255, 0, 195);
+  opacity: 0.9;
   animation: flicker 1.5s infinite alternate;
+}
+.h2 {
+  height: 100px;
+  margin: 0 0;
+  font-weight: 900;
+  width: 8rem;
+  color: rgba(0, 94, 255, 0.907);
+  text-align: center;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
+    0 0 42px rgba(0, 94, 255, 0.907), 0 0 82px rgba(0, 94, 255, 0.907),
+    0 0 92px rgba(0, 94, 255, 0.907), 0 0 102px rgba(0, 94, 255, 0.907),
+    0 0 151px rgba(0, 94, 255, 0.907);
+  font-size: 5rem;
+  background: rgba(143, 242, 242, 0.18);
+  border-radius: 16px;
+  box-shadow: inset 0 0 2px 2px hsla(0, 0%, 0%, 0.2),
+    inset 0 0 2px 4px hsla(0, 0%, 0%, 0.2),
+    inset 0 0 2px 6px hsla(0, 0%, 0%, 0.2),
+    inset 0 0 1px 8px hsla(0, 0%, 0%, 0.5),
+    inset 0 -4px 2px 4px hsla(0, 0%, 0%, 0.5),
+    inset 0 1px 1px 8px hsla(0, 0%, 100%, 0.25);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(143, 242, 242, 0.24);
+  filter: brightness(2);
+}
+@keyframes brightness {
+  0% {
+    filter: brightness(2);
+  }
+  100% {
+    filter: brightness(1.8);
+  }
+  0% {
+    filter: brightness(2);
+  }
+}
+@keyframes scaleDown {
+  0% {
+    scale: 1;
+  }
+  100% {
+    scale: 0.95;
+  }
+  0% {
+    scale: 1;
+  }
+}
+@keyframes blur {
+  0% {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+  100% {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+  0% {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+}
+.h2:hover {
+  cursor: pointer;
+}
+
+.music-notes {
+  font-family: "Noto Music", sans-serif;
 }
 @keyframes flicker {
   0%,
@@ -36,4 +115,26 @@ h1 {
   55% {
     text-shadow: none;
   }
+}
+.songs {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 2rem;
+  margin: 1rem 5rem;
+}
+.items {
+  text-rendering: geometricPrecision;
+  letter-spacing: -0.05rem;
+  font-size: 1.2rem;
+  width: 18rem;
+  height: 4rem;
+  color: black;
+  font-weight: 900;
+}
+.songs img {
+  position: absolute;
+  left: 83%;
+  scale: 0.3;
+  filter: brightness(1.5);
 }
