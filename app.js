@@ -1,4 +1,4 @@
-const notes = ["♯", "𝅘𝅥", "𝅘𝅥𝅰", "𝄾", "𝄞", "𝆺𝅥", "♭", "𝆹𝅥𝅯", "𝅗𝅥", "♫"];
+const notes = ["♯", "𝅘𝅥", "𝅘𝅥𝅰", "𝄾", "𝄞", "𝆺𝅥", "♭", "𝆹𝅥𝅯", "𝅗𝅥", "♫", "𝅀"];
 const songs = [
   {
     soundName: "abba",
@@ -153,12 +153,9 @@ function generateNote() {
   musicNote.textContent = singleNote;
 }
 
-const leftAlign = Math.floor(Math.random() * 300 + 1);
-
 function animateNotes(drumKey) {
   musicNote.style.animation =
     "noteAnim 1s ease-in-out forwards, noteOpacity 1s ease-in-out";
-  document.querySelector(".music-notes").style.left = `${leftAlign}px`;
   setTimeout(() => {
     document.querySelector(".music-notes").style.animation = "";
   }, 1000);

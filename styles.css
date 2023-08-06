@@ -104,8 +104,8 @@ h2:hover {
     0 0 151px rgb(255, 0, 195);
   font-size: 3rem;
   filter: brightness(300%);
-  position: relative;
-  top: -300px;
+  text-align: center;
+  background-position-x: -1;
 }
 
 @keyframes flicker {
@@ -171,5 +171,60 @@ h2:hover {
   }
   100% {
     filter: opacity(0);
+  }
+}
+
+@media (max-width: 850px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  h1 {
+    font-size: 1.7rem;
+    margin: 0 5rem;
+  }
+  h2 {
+    height: 80px;
+    margin: 0 0;
+    font-size: 4rem;
+    font-weight: 600;
+    width: 6rem;
+  }
+  .container {
+    column-gap: 3rem;
+  }
+}
+@media (max-width: 625px) {
+  h1 {
+    font-size: 1.3rem;
+    margin: 0 3rem;
+  }
+  h2 {
+    height: 60px;
+    margin: 0 0;
+    font-size: 3rem;
+    font-weight: 500;
+    width: 5rem;
+  }
+  .container {
+    column-gap: 1.6rem;
+  }
+}
+@media (max-width: 415px) {
+  h1 {
+    font-size: 1rem;
+    margin: 0 1rem;
+  }
+  h2 {
+    height: 50px;
+    margin: 0 0;
+    font-size: 2.8rem;
+    font-weight: 200;
+    width: 4rem;
+  }
+  .container {
+    column-gap: 1.3rem;
   }
 }
