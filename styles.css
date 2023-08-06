@@ -97,7 +97,17 @@ h2:hover {
 
 .music-notes {
   font-family: "Noto Music", sans-serif;
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
+    0 0 42px rgb(255, 0, 195), 0 0 82px rgb(255, 0, 195),
+    0 0 92px rgb(255, 0, 195), 0 0 102px rgb(255, 0, 195),
+    0 0 151px rgb(255, 0, 195);
+  font-size: 3rem;
+  filter: brightness(300%);
+  position: relative;
+  top: -300px;
 }
+
 @keyframes flicker {
   0%,
   18%,
@@ -129,18 +139,37 @@ h2:hover {
   height: 4rem;
   font-size: 3rem;
 }
-.items {
-  text-rendering: geometricPrecision;
-  letter-spacing: -0.05rem;
-  font-size: 1.2rem;
-  width: 18rem;
-  height: 4rem;
-  color: black;
-  font-weight: 900;
+@keyframes noteAnim {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(2) rotate(5deg) translateY(-200px);
+  }
+  50% {
+    transform: scale(4) translateY(-400px);
+  }
+  75% {
+    transform: scale(6) rotate(-5deg) translateY(-600px);
+  }
+  100% {
+    transform: scale(8) translateY(-800px);
+  }
 }
-.songs img {
-  position: absolute;
-  left: 83%;
-  scale: 0.3;
-  filter: brightness(1.5);
+@keyframes noteOpacity {
+  0% {
+    filter: opacity(0);
+  }
+  25% {
+    filter: opacity(0.5);
+  }
+  50% {
+    filter: opacity(1);
+  }
+  75% {
+    filter: opacity(0.5);
+  }
+  100% {
+    filter: opacity(0);
+  }
 }
