@@ -1,3 +1,4 @@
+const notes = ["♯", "𝅘𝅥", "𝅘𝅥𝅰", "𝄾", "𝄞", "𝆺𝅥", "♭", "𝆹𝅥𝅯", "𝅗𝅥", "♫"];
 const songs = [
   {
     soundName: "abba",
@@ -95,12 +96,16 @@ function clickDrums(drumKey, drumSource) {
     const drumSounds = new Audio(drumSource);
     drumSounds.play();
     animateBtns(drumKey);
+    generateNote();
+    animateNotes(drumKey);
   });
   window.addEventListener("keydown", (e) => {
     if (e.key === drumKey) {
       const drumSounds = new Audio(drumSource);
       drumSounds.play();
       animateBtns(drumKey);
+      generateNote();
+      animateNotes(drumKey);
     }
   });
 }
@@ -113,24 +118,48 @@ function animateBtns(drumKey) {
   }, 200);
 }
 
-const songsDiv = document.querySelector(".songs");
+// const songsDiv = document.querySelector(".songs");
 
-for (let song of songs) {
-  const addDiv = document.createElement("div");
-  const addKey = document.createElement("h2");
-  addKey.textContent = song.soundName;
-  addKey.className = `${song.soundName}`;
+// for (let song of songs) {
+//   const addDiv = document.createElement("div");
+//   const addKey = document.createElement("h2");
+//   addKey.textContent = song.soundName;
+//   addKey.className = `${song.soundName}`;
 
-  addDiv.append(addKey);
-  songsDiv.append(addDiv);
+//   addDiv.append(addKey);
+//   songsDiv.append(addDiv);
 
-  clickDrums(song.soundName, song.source);
+//   clickDrums(song.soundName, song.source);
+// }
+
+// function playSongs(songSource) {
+//   document.addEventListener("click", () => {
+//     const backgroundSongs = new Audio(songSource);
+//     backgroundSongs.play();
+//     animateBtns(drumKey);
+//   });
+// }
+
+const musicNote = document.querySelector(".music-notes");
+let singleNote = "";
+
+function generateNote() {
+  singleNote = "";
+  let randomNote = "";
+  for (let i = 0; i < 1; i++) {
+    randomNote = Math.floor(Math.random() * notes.length);
+    singleNote += notes[randomNote];
+  }
+  musicNote.textContent = singleNote;
 }
 
-function playSongs(songSource) {
-  document.addEventListener("click", () => {
-    const backgroundSongs = new Audio(songSource);
-    backgroundSongs.play();
-    animateBtns(drumKey);
-  });
+const leftAlign = Math.floor(Math.random() * 300 + 1);
+
+function animateNotes(drumKey) {
+  musicNote.style.animation =
+    "noteAnim 1s ease-in-out forwards, noteOpacity 1s ease-in-out";
+  document.querySelector(".music-notes").style.left = `${leftAlign}px`;
+  setTimeout(() => {
+    document.querySelector(".music-notes").style.animation = "";
+  }, 1000);
 }
