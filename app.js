@@ -96,14 +96,12 @@ function clickDrums(drumKey, drumSource) {
     const drumSounds = new Audio(drumSource);
     drumSounds.play();
     animateBtns(drumKey);
-    generateNote();
   });
   window.addEventListener("keydown", (e) => {
     if (e.key === drumKey) {
       const drumSounds = new Audio(drumSource);
       drumSounds.play();
       animateBtns(drumKey);
-      generateNote();
     }
   });
 }
@@ -126,33 +124,47 @@ for (let song of songs) {
 
   addDiv.append(addKey);
   songsDiv.append(addDiv);
-
-  clickDrums(song.soundName, song.source);
+  playSongs(song.source, song.soundName);
 }
 
-function playSongs(songSource) {
-  document.addEventListener("click", () => {
-    const backgroundSongs = new Audio(songSource);
-    backgroundSongs.play();
-    addKey.textContent = "Pause";
-    animateBtns(drumKey);
+function playSongs(songSource, soundName) {
+  const backgroundSongs = new Audio(songSource);
+  let crazyFroggy = true;
+  const knapp = document.querySelector(`.${soundName}`);
+  knapp.addEventListener("click", () => {
+    if (!crazyFroggy) {
+      backgroundSongs.pause();
+      crazyFroggy = true;
+      knapp.textContent = soundName;
+      knapp.style.animation =
+        "blur .15s ease-in, scaleDown .15s ease-in, brightness .15s ease-in";
+    } else {
+      backgroundSongs.play();
+      crazyFroggy = false;
+      knapp.textContent = "pause";
+      knapp.style.animation =
+        "blur .15s ease-in, scaleDown .15s ease-in, brightness .15s ease-in";
+    }
   });
 }
+
 const noteContainer = document.querySelector(".note-container");
 let singleNote = "";
 
-function generateNote() {
-  singleNote = "";
-  let randomNote = "";
-  for (let i = 0; i < 1; i++) {
-    randomNote = Math.floor(Math.random() * notes.length);
-    singleNote += notes[randomNote];
-  }
-  const musicNote = document.createElement("h3");
-  musicNote.classList.add("music-notes");
-  musicNote.textContent = singleNote;
-  noteContainer.append(musicNote);
-  setTimeout(() => {
-    musicNote.remove();
-  }, 700);
-}
+// function generateNote() {
+//   setInterval(() => {
+//     singleNote = "";
+//     let randomNote = "";
+//     for (let i = 0; i < 1; i++) {
+//       randomNote = Math.floor(Math.random() * notes.length);
+//       singleNote += notes[randomNote];
+//     }
+//     const musicNote = document.createElement("h3");
+//     musicNote.classList.add("music-notes");
+//     musicNote.textContent = singleNote;
+//     noteContainer.append(musicNote);
+//     setTimeout(() => {
+//       musicNote.remove();
+//     }, 700);
+//   }, 500);
+// }
