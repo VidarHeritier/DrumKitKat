@@ -7,8 +7,9 @@ body {
   width: 100vw;
   height: 100svh;
   font-family: "Limelight", cursive;
-  overflow: hidden;
+  position: relative;
 }
+
 .container {
   display: grid;
   place-items: center;
@@ -35,12 +36,12 @@ h2 {
   margin: 0 0;
   font-weight: 900;
   width: 8rem;
-  color: rgba(0, 94, 255, 0.907);
+  color: rgba(1, 42, 112, 0.907);
   text-align: center;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
-    0 0 42px rgba(0, 94, 255, 0.907), 0 0 82px rgba(0, 94, 255, 0.907),
-    0 0 92px rgba(0, 94, 255, 0.907), 0 0 102px rgba(0, 94, 255, 0.907),
-    0 0 151px rgba(0, 94, 255, 0.907);
+    0 0 42px rgba(1, 42, 112, 0.907), 0 0 82px rgba(1, 42, 112, 0.907),
+    0 0 92px rgba(1, 42, 112, 0.907), 0 0 102px rgba(1, 42, 112, 0.907),
+    0 0 151px rgba(1, 42, 112, 0.907);
   font-size: 5rem;
   background: rgba(143, 242, 242, 0.18);
   border-radius: 16px;
@@ -102,12 +103,15 @@ h2:hover {
     0 0 42px rgb(255, 0, 195), 0 0 82px rgb(255, 0, 195),
     0 0 92px rgb(255, 0, 195), 0 0 102px rgb(255, 0, 195),
     0 0 151px rgb(255, 0, 195);
-  font-size: 3rem;
+  font-size: 10rem;
   filter: brightness(300%);
   text-align: center;
-  background-position-x: -1;
+  position: absolute;
+  left: 47.3%;
+  bottom: 20%;
+  animation: noteTravel 1s ease-in-out;
+  background-position-x: -999;
 }
-
 @keyframes flicker {
   0%,
   18%,
@@ -128,49 +132,44 @@ h2:hover {
   }
 }
 .songs {
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
   margin: 2rem 5rem;
 }
 .songs h2 {
-  width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3rem;
+  width: fit-content;
   height: 4rem;
   font-size: 3rem;
+  color: rgb(105, 1, 136);
 }
-@keyframes noteAnim {
+@keyframes noteFontSize {
+}
+@keyframes noteTravel {
   0% {
-    transform: scale(1);
+    transform: scale(0) rotate(0deg);
+    filter: opacity(1);
   }
   25% {
-    transform: scale(2) rotate(5deg) translateY(-200px);
-  }
-  50% {
-    transform: scale(4) translateY(-400px);
+    transform: rotate(5deg) scale(0.75);
   }
   75% {
-    transform: scale(6) rotate(-5deg) translateY(-600px);
+    transform: rotate(-5deg) scale(1.5);
   }
+
   100% {
-    transform: scale(8) translateY(-800px);
+    transform: scale(2) rotate(0deg);
+    filter: opacity(0);
   }
 }
 @keyframes noteOpacity {
   0% {
-    filter: opacity(0);
-  }
-  25% {
-    filter: opacity(0.5);
-  }
-  50% {
-    filter: opacity(1);
-  }
-  75% {
-    filter: opacity(0.5);
   }
   100% {
-    filter: opacity(0);
   }
 }
 
@@ -183,7 +182,7 @@ h2:hover {
   }
   h1 {
     font-size: 1.7rem;
-    margin: 0 5rem;
+    margin: 1rem 5rem;
   }
   h2 {
     height: 80px;
@@ -195,11 +194,16 @@ h2:hover {
   .container {
     column-gap: 3rem;
   }
+  .songs h2 {
+    height: 4rem;
+    padding: 0 1.3rem;
+    font-size: 1.8rem;
+  }
 }
 @media (max-width: 625px) {
   h1 {
     font-size: 1.3rem;
-    margin: 0 3rem;
+    margin: 1rem 3rem;
   }
   h2 {
     height: 60px;
@@ -211,11 +215,17 @@ h2:hover {
   .container {
     column-gap: 1.6rem;
   }
+  .songs h2 {
+    height: 3.2rem;
+
+    padding: 0 0.9rem;
+    font-size: 1.4rem;
+  }
 }
 @media (max-width: 415px) {
   h1 {
     font-size: 1rem;
-    margin: 0 1rem;
+    margin: 1rem;
   }
   h2 {
     height: 50px;
@@ -227,4 +237,17 @@ h2:hover {
   .container {
     column-gap: 1.3rem;
   }
+  .songs h2 {
+    height: 2rem;
+
+    padding: 0 0.7rem;
+    font-size: 1.1rem;
+  }
+}
+.example::-webkit-scrollbar {
+  display: none;
+}
+.example {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

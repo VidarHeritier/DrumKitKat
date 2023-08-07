@@ -97,7 +97,6 @@ function clickDrums(drumKey, drumSource) {
     drumSounds.play();
     animateBtns(drumKey);
     generateNote();
-    animateNotes(drumKey);
   });
   window.addEventListener("keydown", (e) => {
     if (e.key === drumKey) {
@@ -105,7 +104,6 @@ function clickDrums(drumKey, drumSource) {
       drumSounds.play();
       animateBtns(drumKey);
       generateNote();
-      animateNotes(drumKey);
     }
   });
 }
@@ -118,29 +116,29 @@ function animateBtns(drumKey) {
   }, 200);
 }
 
-// const songsDiv = document.querySelector(".songs");
+const songsDiv = document.querySelector(".songs");
 
-// for (let song of songs) {
-//   const addDiv = document.createElement("div");
-//   const addKey = document.createElement("h2");
-//   addKey.textContent = song.soundName;
-//   addKey.className = `${song.soundName}`;
+for (let song of songs) {
+  const addDiv = document.createElement("div");
+  const addKey = document.createElement("h2");
+  addKey.textContent = song.soundName;
+  addKey.className = `${song.soundName}`;
 
-//   addDiv.append(addKey);
-//   songsDiv.append(addDiv);
+  addDiv.append(addKey);
+  songsDiv.append(addDiv);
 
-//   clickDrums(song.soundName, song.source);
-// }
+  clickDrums(song.soundName, song.source);
+}
 
-// function playSongs(songSource) {
-//   document.addEventListener("click", () => {
-//     const backgroundSongs = new Audio(songSource);
-//     backgroundSongs.play();
-//     animateBtns(drumKey);
-//   });
-// }
-
-const musicNote = document.querySelector(".music-notes");
+function playSongs(songSource) {
+  document.addEventListener("click", () => {
+    const backgroundSongs = new Audio(songSource);
+    backgroundSongs.play();
+    addKey.textContent = "Pause";
+    animateBtns(drumKey);
+  });
+}
+const noteContainer = document.querySelector(".note-container");
 let singleNote = "";
 
 function generateNote() {
@@ -150,13 +148,11 @@ function generateNote() {
     randomNote = Math.floor(Math.random() * notes.length);
     singleNote += notes[randomNote];
   }
+  const musicNote = document.createElement("h3");
+  musicNote.classList.add("music-notes");
   musicNote.textContent = singleNote;
-}
-
-function animateNotes(drumKey) {
-  musicNote.style.animation =
-    "noteAnim 1s ease-in-out forwards, noteOpacity 1s ease-in-out";
+  noteContainer.append(musicNote);
   setTimeout(() => {
-    document.querySelector(".music-notes").style.animation = "";
-  }, 1000);
+    musicNote.remove();
+  }, 700);
 }
