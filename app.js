@@ -91,30 +91,35 @@ for (let drum of drums) {
 
   clickDrums(drum.key, drum.source);
 }
+
 function clickDrums(drumKey, drumSource) {
   document.querySelector(`.${drumKey}`).addEventListener("click", () => {
     const drumSounds = new Audio(drumSource);
     drumSounds.play();
     animateBtns(drumKey);
+    displayNote();
   });
   window.addEventListener("keydown", (e) => {
     if (e.key === drumKey) {
       const drumSounds = new Audio(drumSource);
       drumSounds.play();
       animateBtns(drumKey);
+      displayNote();
     }
   });
 }
 
 function animateBtns(drumKey) {
-  document.querySelector(`.${drumKey}`).style.animation =
+  const element = document.querySelector(`.${drumKey}`);
+  element.style.animation =
     "blur .15s ease-in, scaleDown .15s ease-in, brightness .15s ease-in";
   setTimeout(() => {
-    document.querySelector(`.${drumKey}`).style.animation = "";
+    element.style.animation = "";
   }, 200);
 }
 
 const songsDiv = document.querySelector(".songs");
+let currentPlayingSong = null;
 
 for (let song of songs) {
   const addDiv = document.createElement("div");
@@ -130,41 +135,102 @@ for (let song of songs) {
 function playSongs(songSource, soundName) {
   const backgroundSongs = new Audio(songSource);
   let crazyFroggy = true;
-  const knapp = document.querySelector(`.${soundName}`);
-  knapp.addEventListener("click", () => {
+  const songButtons = document.querySelector(`.${soundName}`);
+  songButtons.addEventListener("click", () => {
+    if (currentPlayingSong && currentPlayingSong !== backgroundSongs) {
+      currentPlayingSong.pause();
+      document.querySelector(`.${currentPlayingSong.soundName}`).textContent =
+        currentPlayingSong.soundName;
+    }
     if (!crazyFroggy) {
       backgroundSongs.pause();
       crazyFroggy = true;
-      knapp.textContent = soundName;
-      knapp.style.animation =
-        "blur .15s ease-in, scaleDown .15s ease-in, brightness .15s ease-in";
+      songButtons.textContent = soundName;
     } else {
       backgroundSongs.play();
+      currentPlayingSong = backgroundSongs;
+      backgroundSongs.soundName = soundName;
       crazyFroggy = false;
-      knapp.textContent = "pause";
-      knapp.style.animation =
-        "blur .15s ease-in, scaleDown .15s ease-in, brightness .15s ease-in";
+      songButtons.textContent = "pause";
     }
+    songButtons.style.animation =
+      "blur .15s ease-in, scaleDown .15s ease-in, brightness .15s ease-in";
   });
 }
 
 const noteContainer = document.querySelector(".note-container");
-let singleNote = "";
+const notePool = [];
 
-// function generateNote() {
-//   setInterval(() => {
-//     singleNote = "";
-//     let randomNote = "";
-//     for (let i = 0; i < 1; i++) {
-//       randomNote = Math.floor(Math.random() * notes.length);
-//       singleNote += notes[randomNote];
-//     }
-//     const musicNote = document.createElement("h3");
-//     musicNote.classList.add("music-notes");
-//     musicNote.textContent = singleNote;
-//     noteContainer.append(musicNote);
-//     setTimeout(() => {
-//       musicNote.remove();
-//     }, 700);
-//   }, 500);
-// }
+function displayNote() {
+  let note;
+  if (notePool.length > 0) {
+    note = notePool.pop();
+  } else {
+    note = document.createElement("h3");
+    note.classList.add("music-notes");
+    noteContainer.append(note);
+  }
+  let randomNote = Math.floor(Math.random() * notes.length);
+  note.textContent = notes[randomNote];
+  note.style.display = "block";
+  note.style.opacity = 1;
+  setTimeout(() => {
+    note.style.opacity = 0;
+    setTimeout(() => {
+      note.style.display = "none";
+      notePool.push(note);
+    }, 500);
+  }, 500);
+}
+
+let originalContent = null;
+
+window.addEventListener("keypress", (e) => {
+  if (e.key === "c") {
+    displayPicture();
+  }
+});
+
+function displayPicture() {
+  const imageUrl = "/Images/Cat.jpeg";
+  const img = document.createElement("img");
+  img.src = imageUrl;
+  img.style.maxWidth = "100%";
+  img.style.maxHeight = "100%";
+  img.style.margin = "auto";
+  img.style.display = "block";
+
+  const containerDiv = document.createElement("div");
+  containerDiv.style.display = "flex";
+  containerDiv.style.alignItems = "center";
+  containerDiv.style.justifyContent = "center";
+  containerDiv.style.height = "100vh";
+  containerDiv.style.width = "100vw";
+  containerDiv.style.position = "fixed";
+  containerDiv.style.top = "0";
+  containerDiv.style.left = "0";
+  containerDiv.style.zIndex = "9999";
+
+  containerDiv.appendChild(img);
+
+  if (!originalContent) {
+    originalContent = document.body.cloneNode(true);
+  }
+
+  document.body.replaceChildren(containerDiv);
+
+  function restoreOriginalContent() {
+    document.body.replaceChildren(...originalContent.children);
+    originalContent = null;
+  }
+
+  img.addEventListener("click", () => {
+    restoreOriginalContent();
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      restoreOriginalContent();
+    }
+  });
+}
