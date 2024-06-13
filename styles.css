@@ -1,3 +1,18 @@
+:root {
+  --shad1: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px rgb(255, 0, 195),
+    0 0 82px rgb(255, 0, 195), 0 0 92px rgb(255, 0, 195),
+    0 0 102px rgb(255, 0, 195), 0 0 151px rgb(255, 0, 195);
+  --shad2: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
+    0 0 42px rgba(1, 42, 112, 0.907), 0 0 82px rgba(1, 42, 112, 0.907),
+    0 0 92px rgba(1, 42, 112, 0.907), 0 0 102px rgba(1, 42, 112, 0.907),
+    0 0 151px rgba(1, 42, 112, 0.907);
+  --shad3: inset 0 0 2px 2px hsla(0, 0%, 0%, 0.2),
+    inset 0 0 2px 4px hsla(0, 0%, 0%, 0.2),
+    inset 0 0 2px 6px hsla(0, 0%, 0%, 0.2),
+    inset 0 0 1px 8px hsla(0, 0%, 0%, 0.5),
+    inset 0 -4px 2px 4px hsla(0, 0%, 0%, 0.5),
+    inset 0 1px 1px 8px hsla(0, 0%, 100%, 0.25);
+}
 body {
   border: none;
   margin: 0;
@@ -5,9 +20,10 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
-  height: 100svh;
+  height: 100vh;
   font-family: "Limelight", cursive;
   position: relative;
+  overflow: hidden;
 }
 
 .container {
@@ -23,10 +39,7 @@ h1 {
   font-weight: 100;
   letter-spacing: 0.2rem;
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
-    0 0 42px rgb(255, 0, 195), 0 0 82px rgb(255, 0, 195),
-    0 0 92px rgb(255, 0, 195), 0 0 102px rgb(255, 0, 195),
-    0 0 151px rgb(255, 0, 195);
+  text-shadow: var(--shad);
   opacity: 0.9;
   animation: flicker 1.5s infinite alternate;
 }
@@ -38,24 +51,17 @@ h2 {
   width: 8rem;
   color: rgba(1, 42, 112, 0.907);
   text-align: center;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
-    0 0 42px rgba(1, 42, 112, 0.907), 0 0 82px rgba(1, 42, 112, 0.907),
-    0 0 92px rgba(1, 42, 112, 0.907), 0 0 102px rgba(1, 42, 112, 0.907),
-    0 0 151px rgba(1, 42, 112, 0.907);
+  text-shadow: var(--shad2);
   font-size: 5rem;
   background: rgba(143, 242, 242, 0.18);
   border-radius: 16px;
-  box-shadow: inset 0 0 2px 2px hsla(0, 0%, 0%, 0.2),
-    inset 0 0 2px 4px hsla(0, 0%, 0%, 0.2),
-    inset 0 0 2px 6px hsla(0, 0%, 0%, 0.2),
-    inset 0 0 1px 8px hsla(0, 0%, 0%, 0.5),
-    inset 0 -4px 2px 4px hsla(0, 0%, 0%, 0.5),
-    inset 0 1px 1px 8px hsla(0, 0%, 100%, 0.25);
+  box-shadow: var(--shad3);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(143, 242, 242, 0.24);
   filter: brightness(2);
 }
+
 @keyframes brightness {
   0% {
     filter: brightness(2);
@@ -99,10 +105,7 @@ h2:hover {
 .music-notes {
   font-family: "Noto Music", sans-serif;
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
-    0 0 42px rgb(255, 0, 195), 0 0 82px rgb(255, 0, 195),
-    0 0 92px rgb(255, 0, 195), 0 0 102px rgb(255, 0, 195),
-    0 0 151px rgb(255, 0, 195);
+  text-shadow: var(--shad1);
   font-size: 10rem;
   filter: brightness(300%);
   text-align: center;
@@ -120,10 +123,7 @@ h2:hover {
   53%,
   57%,
   100% {
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff,
-      0 0 40px rgb(255, 0, 195), 0 0 80px rgb(255, 0, 195),
-      0 0 90px rgb(255, 0, 195), 0 0 100px rgb(255, 0, 195),
-      0 0 150px rgb(255, 0, 195);
+    text-shadow: var(--shad1);
   }
   20%,
   24%,
