@@ -2,16 +2,15 @@ const notes = ["♯", "𝅘𝅥", "𝅘𝅥𝅰", "𝄾", "𝄞", "𝆺𝅥", "♭", "𝆹𝅥𝅯", "�
 const songs = [
   {
     soundName: "abba",
-    source: "./Sounds/_ABBA_Name_Of_The_Game_drumnet_ru_drumless.mp3",
+    source: "./Sounds/ABBA_Name_Of_The_Game_drumnet_ru_drumless.mp3",
   },
   {
     soundName: "metallica",
-    source:
-      "./Sounds/_Metallica_Enter_Sandman_metalika_drumnet_ru_drumless.mp3",
+    source: "./Sounds/Metallica_Enter_Sandman_metalika_drumnet_ru_drumless.mp3",
   },
   {
     soundName: "queen",
-    source: "./Sounds/_Queen_We_Are_The_Champions_drumnet_ru_drumless.mp3",
+    source: "./Sounds/Queen_We_Are_The_Champions_drumnet_ru_drumless.mp3",
   },
 ];
 
@@ -192,7 +191,7 @@ window.addEventListener("keypress", (e) => {
 });
 
 function displayPicture() {
-  const imageUrl = "/Images/Cat.jpeg";
+  const imageUrl = "./Images/Cat.jpeg";
   const img = document.createElement("img");
   img.src = imageUrl;
   img.style.maxWidth = "100%";
