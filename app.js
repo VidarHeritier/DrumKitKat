@@ -182,15 +182,23 @@ function displayNote() {
   }, 500);
 }
 
-let originalContent = null;
-
 window.addEventListener("keypress", (e) => {
   if (e.key === "c") {
-    displayPicture();
+    const originalContent = document.querySelectorAll(".easter");
+
+    const isHidden = Array.from(originalContent).some(
+      (element) => element.style.visibility === "hidden"
+    );
+
+    if (isHidden) {
+      restoreOriginalContent(originalContent);
+    } else {
+      displayPicture(originalContent);
+    }
   }
 });
 
-function displayPicture() {
+function displayPicture(originalContent) {
   const imageUrl = "./Images/Cat.jpeg";
   const img = document.createElement("img");
   img.src = imageUrl;
@@ -209,27 +217,33 @@ function displayPicture() {
   containerDiv.style.top = "0";
   containerDiv.style.left = "0";
   containerDiv.style.zIndex = "9999";
+  containerDiv.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
 
   containerDiv.appendChild(img);
+  document.body.appendChild(containerDiv);
 
-  if (!originalContent) {
-    originalContent = document.body.cloneNode(true);
-  }
-
-  document.body.replaceChildren(containerDiv);
-
-  function restoreOriginalContent() {
-    document.body.replaceChildren(...originalContent.children);
-    originalContent = null;
-  }
-
-  img.addEventListener("click", () => {
-    restoreOriginalContent();
+  originalContent.forEach((element) => {
+    element.style.visibility = "hidden";
   });
 
-  window.addEventListener("keydown", (event) => {
+  window.addEventListener("click", () =>
+    restoreOriginalContent(originalContent)
+  );
+
+  window.addEventListener("keydown", function escListener(event) {
     if (event.key === "Escape") {
-      restoreOriginalContent();
+      restoreOriginalContent(originalContent);
+      window.removeEventListener("keydown", escListener);
     }
   });
+}
+
+function restoreOriginalContent(originalContent) {
+  const containerDiv = document.querySelector("div[style*='position: fixed']");
+  originalContent.forEach((element) => {
+    element.style.visibility = "visible";
+  });
+  if (containerDiv) {
+    containerDiv.remove();
+  }
 }
