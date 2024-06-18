@@ -25,7 +25,9 @@ body {
   position: relative;
   overflow: hidden;
 }
-
+.easter {
+  visibility: none;
+}
 .container {
   display: grid;
   place-items: center;
